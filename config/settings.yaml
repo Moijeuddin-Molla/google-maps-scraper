@@ -1,0 +1,35 @@
+# config/settings.yaml
+
+queries:
+  - "restaurants in Rajshahi"
+  - "dentists in Dhaka"
+
+limits:
+  max_results: 100
+  scroll_attempts: 3
+
+# NEW: Easily switch your strategy here!
+filters:
+  # Options: "no_website", "has_website", or "any"
+  target_website_status: "has_website" 
+  # Skip businesses with a rating lower than this (Set to 0.0 to ignore)
+  min_rating: 4.0 
+
+delays:
+  min_pause_sec: 1.5
+  max_pause_sec: 4.2
+  website_check_timeout_ms: 2500
+
+selectors:
+  feed_panel: 'div[role="feed"]'
+  business_card: 'a[href*="/maps/place/"]'
+  website_primary: 'a[data-item-id="authority"]'
+  website_fallback: 'a[aria-label^="Website:"]'
+  business_name: 'h1'
+  phone: 'button[aria-label^="Phone:"]'
+  address: 'button[aria-label^="Address:"]'
+  rating: 'span[aria-label*="stars"]' # NEW: Grabs the star rating
+  end_of_list: 'text="You’ve reached the end of the list."'
+
+output:
+  csv_path: "data/leads.csv" # Renamed since it's no longer just "no_website"
